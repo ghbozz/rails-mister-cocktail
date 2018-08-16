@@ -12,7 +12,38 @@
   </head>
 
   <body>
+
+    <div class="navbar-wagon">
+      <!-- Logo -->
+      <a href="/" class="navbar-wagon-brand">
+        <img class="img-circle" src="https://static1.squarespace.com/static/52f97bd4e4b08c719fef7e1b/56e327fb1bbee01578e1d85b/56ef41904c2f85365bd7d7da/1458520468546/Day-15-d.png?format=2500w" alt="logo">
+      </a>
+
+      <!-- Right Navigation -->
+      <div class="navbar-wagon-right hidden-xs hidden-sm">
+        <ul class="list-unstyled list-inline text-center">
+        <li><%= link_to 'Add Cocktail', new_cocktail_path, class: 'btn btn-primary' %></li>
+        <li><%= link_to 'All Cocktails', cocktails_path, class: 'btn btn-info' %></li>
+        </ul>
+
+      </div>
+    </div>
+
     <%= yield %>
+
+<!--     <div class="footer">
+      <div class="footer-links">
+        <a href="#"><i class="fa fa-github"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+      </div>
+      <div class="footer-copyright">
+        This footer is made with <i class="fa fa-heart"></i> at Le Wagon
+      </div>
+    </div> -->
+
     <%= javascript_include_tag "application" %> <!-- from app/assets/javascripts/application.js -->
     <%= javascript_pack_tag "application" %>    <!-- from app/javascript/packs/application.js -->
   </body>
