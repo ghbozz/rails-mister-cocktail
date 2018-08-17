@@ -13,23 +13,9 @@
 
   <body>
 
-    <div class="navbar-wagon">
-      <!-- Logo -->
-      <a href="/" class="navbar-wagon-brand">
-        <img class="img-circle" src="https://static1.squarespace.com/static/52f97bd4e4b08c719fef7e1b/56e327fb1bbee01578e1d85b/56ef41904c2f85365bd7d7da/1458520468546/Day-15-d.png?format=2500w" alt="logo">
-      </a>
-
-      <!-- Right Navigation -->
-      <div class="navbar-wagon-right hidden-xs hidden-sm">
-        <ul class="list-unstyled list-inline text-center">
-        <li><%= link_to 'Add Cocktail', new_cocktail_path, class: 'btn btn-primary' %></li>
-        <li><%= link_to 'All Cocktails', cocktails_path, class: 'btn btn-info' %></li>
-        </ul>
-
-      </div>
-    </div>
-
+    <%= render 'layouts/navbar' %>
     <%= yield %>
+    <%= render 'layouts/footer' %>
 
 <!--     <div class="footer">
       <div class="footer-links">
