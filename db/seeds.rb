@@ -39,6 +39,7 @@ puts 'Creating Cocktails & Doses'
     user_serialized = open(url).read
     result = JSON.parse(user_serialized)
       cocktail = Cocktail.new(name: result['drinks'][0]['strDrink'])
+      cocktail.description = result['drinks'][0]['strInstructions']
       cocktail.image_url = result['drinks'][0]["strDrinkThumb"]
       result['drinks'][0].each do |item|
         if (/strIngredient/).match?(item[0])
