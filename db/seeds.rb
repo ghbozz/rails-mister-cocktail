@@ -54,6 +54,13 @@ puts 'Creating Cocktails & Doses'
         dose.ingredient_id = Ingredient.where(name: ingredient).first.id
         dose.cocktail = cocktail
         dose.save
+      else
+        new_ingredient = Ingredient.create!(name: ingredient)
+        i = cocktail_ingredients.find_index(ingredient)
+        dose = Dose.new(description: result['drinks'][0]["strMeasure#{i+1}"])
+        dose.ingredient_id = Ingredient.where(name: ingredient).first.id
+        dose.cocktail = cocktail
+        dose.save
       end
     end
   end
