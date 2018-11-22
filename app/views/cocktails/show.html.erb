@@ -12,6 +12,23 @@
         </li>
         <% end %>
       </ul>
+
+      <h4>Reviews (<%= @cocktail.reviews.count %>)</h4>
+
+      <ul class="list-group">
+        <% @cocktail.reviews.each do |dose| %>
+        <li class="list-group-item">
+          <%= dose.content %>
+        </li>
+        <% end %>
+      </ul>
+
+      <h4>Add a review</h4>
+      <%= simple_form_for [@cocktail, @review] do |f| %>
+        <%= f.input :content%>
+        <%= f.submit "Add ur Review", class: "btn btn-primary", id: 'create-cocktail-btn' %>
+      <% end %>
+      <br>
       <%= link_to 'Add a Dose', new_cocktail_dose_path(@cocktail), :class => 'btn btn-primary'  %>
       <%= link_to 'Back to Cocktails', cocktails_path, :class => 'btn btn-info' %>
       <%= link_to "Delete", cocktail_path(@cocktail), method: :delete, :class => 'btn btn-danger' %>

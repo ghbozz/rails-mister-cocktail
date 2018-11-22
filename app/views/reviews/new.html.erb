@@ -1,0 +1,10 @@
+<div class="container">
+
+  <h1>Add a Review</h1>
+  <!-- <p>Find me in app/views/flats/new.html.erb</p> -->
+
+  <%= simple_form_for [@cocktail, @review] do |f| %>
+    <%= f.input :content%>
+    <%= f.submit "add ur cocktail", class: "btn btn-primary", id: 'create-cocktail-btn' %>
+  <% end %>
+</div>
