@@ -31,10 +31,8 @@ result = JSON.parse(user_serialized)
       cocktails_url << cocktail_url
     end
 
-  cocktail_ingredients = Array.new
-
   cocktails_url.each do |url|
-    p url
+    cocktail_ingredients = []
     user_serialized = open(url).read
     result = JSON.parse(user_serialized)
       cocktail = Cocktail.new(name: result['drinks'][0]['strDrink'])
@@ -48,7 +46,8 @@ result = JSON.parse(user_serialized)
     cocktail_ingredients.reject!(&:blank?).each do |ingredient|
       if Ingredient.where(name: ingredient).count == 1
         i = cocktail_ingredients.find_index(ingredient)
-        dose = Dose.new(description: result['drinks'][0]["strMeasure#{i}"])
+        p result['drinks'][0]["strMeasure#{i}"]
+        dose = Dose.new(description: result['drinks'][0]["strMeasure#{i+1}"])
         dose.ingredient_id = Ingredient.where(name: ingredient).first.id
         dose.cocktail = cocktail
         dose.save
