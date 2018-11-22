@@ -6,7 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts 'Destroy DB ----------'
+Dose.destroy_all
+Cocktail.destroy_all
+Ingredient.destroy_all
 
+
+puts 'Creating Ingredients'
 
 url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
 user_serialized = open(url).read
@@ -16,3 +22,36 @@ result = JSON.parse(user_serialized)
     # p item['strIngredient1']
   end
 
+  cocktails_url = Array.new
+  url = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail"
+  user_serialized = open(url).read
+  result = JSON.parse(user_serialized)
+    result['drinks'].each do |item|
+      cocktail_url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=#{item["idDrink"]}"
+      cocktails_url << cocktail_url
+    end
+
+  cocktail_ingredients = Array.new
+
+  cocktails_url.each do |url|
+    p url
+    user_serialized = open(url).read
+    result = JSON.parse(user_serialized)
+      cocktail = Cocktail.new(name: result['drinks'][0]['strDrink'])
+      cocktail.image_url = result['drinks'][0]["strDrinkThumb"]
+      result['drinks'][0].each do |item|
+        if (/strIngredient/).match?(item[0])
+          cocktail_ingredients << item[1]
+        end
+      end
+
+    cocktail_ingredients.reject!(&:blank?).each do |ingredient|
+      if Ingredient.where(name: ingredient).count == 1
+        i = cocktail_ingredients.find_index(ingredient)
+        dose = Dose.new(description: result['drinks'][0]["strMeasure#{i}"])
+        dose.ingredient_id = Ingredient.where(name: ingredient).first.id
+        dose.cocktail = cocktail
+        dose.save
+      end
+    end
+  end
