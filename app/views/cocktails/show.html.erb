@@ -2,6 +2,12 @@
   <div class="show-container">
     <div class="details-container">
       <h1><%= @cocktail.name %></h1>
+
+      <div>
+        <h4>Description</h4>
+        <p><%= @cocktail.description %></p>
+      </div>
+
       <h4>Ingredients (<%= @cocktail.ingredients.count %>)</h4>
 
       <ul class="list-group">

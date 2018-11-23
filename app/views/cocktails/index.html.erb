@@ -20,7 +20,7 @@
             <div class="card-category"><%= cocktail.name %></div>
             <div class="card-description">
               <h2></h2>
-              <p><%= cocktail.description %></p>
+              <p><%= cocktail.description.chars.first(50).join('') %></p>
             </div>
             <%= link_to 'Details', cocktail_path(cocktail), :class => 'btn btn-primary btn-details' %>
           </div>

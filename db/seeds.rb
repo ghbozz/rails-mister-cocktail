@@ -6,13 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-puts 'Destroy DB ----------'
+puts 'DB Destroy ----------'
 Dose.destroy_all
 Cocktail.destroy_all
 Ingredient.destroy_all
+puts 'Done!'
 
 
-puts 'Creating Ingredients'
+puts 'Creating Ingredients...'
 
 url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
 user_serialized = open(url).read
@@ -22,8 +23,8 @@ result = JSON.parse(user_serialized)
     # p item['strIngredient1']
   end
 
-puts 'Done!'
-puts 'Creating Cocktails & Doses'
+puts 'Done!!'
+puts 'Creating Cocktails & Doses...'
 
   cocktails_url = Array.new
   url = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail"
