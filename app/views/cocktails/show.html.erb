@@ -1,23 +1,62 @@
+
 <div class="container">
-  <div class="show-container">
-    <div class="details-container">
-      <h1><%= @cocktail.name %></h1>
+  <div class="global-show-container container">
 
-      <div>
-        <h4>Description</h4>
-        <p><%= @cocktail.description %></p>
+    <div class="show-container">
+      <div class="details-container">
+
+<!--         <div>
+          <h4>Description</h4>
+          <p><%= @cocktail.description %></p>
+        </div> -->
+
+        <h4>Ingredients (<%= @cocktail.ingredients.count %>)</h4>
+
+        <ul class="list-group">
+          <% @cocktail.doses.each do |dose| %>
+          <li class="list-group-item">
+            <%= dose.description %> - <%= dose.ingredient.name %>
+            <%= link_to "Delete", dose_path(dose), method: :delete %>
+          </li>
+          <% end %>
+        </ul>
+
+        <br>
+        <%= link_to 'Add a Dose', new_cocktail_dose_path(@cocktail), :class => 'btn btn-primary'  %>
+        <%= link_to 'Back to Cocktails', cocktails_path, :class => 'btn btn-info' %>
+        <%= link_to "Delete", cocktail_path(@cocktail), method: :delete, :class => 'btn btn-danger' %>
       </div>
+    </div>
 
-      <h4>Ingredients (<%= @cocktail.ingredients.count %>)</h4>
 
-      <ul class="list-group">
-        <% @cocktail.doses.each do |dose| %>
-        <li class="list-group-item">
-          <%= dose.description %> - <%= dose.ingredient.name %>
-          <%= link_to "Delete", dose_path(dose), method: :delete %>
-        </li>
-        <% end %>
-      </ul>
+
+    <div class="example-2 show-card">
+      <div class="wrapper" style="background-image: url('<%= @cocktail.image_url %>')">
+        <div class="header">
+          <div class="date">
+            <span class="day">12</span>
+            <span class="month">Aug</span>
+            <span class="year">2016</span>
+          </div>
+          <ul class="menu-content">
+            <li>
+              <a href="#" class="fa fa-bookmark-o"></a>
+            </li>
+            <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
+            <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
+          </ul>
+        </div>
+        <div class="data">
+          <div class="content">
+            <h1 class="title"><a href="#"><%= @cocktail.name %></a></h1>
+            <p class="text"><%= @cocktail.description %></p>
+            <a href="#" class="button">Read more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
     <div id="reviews">
       <h4>Reviews (<%= @cocktail.reviews.count %>)</h4>
@@ -31,18 +70,10 @@
       </ul>
     </div>
 
-      <h4>Add a review</h4>
-      <%= simple_form_for [@cocktail, @review] do |f| %>
-        <%= f.input :content %>
-        <%= f.submit "Add ur Review", class: "btn btn-primary", id: 'create-review-btn' %>
-      <% end %>
-      <br>
-      <%= link_to 'Add a Dose', new_cocktail_dose_path(@cocktail), :class => 'btn btn-primary'  %>
-      <%= link_to 'Back to Cocktails', cocktails_path, :class => 'btn btn-info' %>
-      <%= link_to "Delete", cocktail_path(@cocktail), method: :delete, :class => 'btn btn-danger' %>
-    </div>
+    <h4>Add a review</h4>
 
-    <div class="details-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=@cocktail.image_url%>);">
-    </div>
-  </div>
+    <%= simple_form_for [@cocktail, @review] do |f| %>
+      <%= f.input :content %>
+      <%= f.submit "Add ur Review", class: "btn btn-primary", id: 'create-review-btn' %>
+    <% end %>
 </div>
