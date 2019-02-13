@@ -14,7 +14,7 @@
   <!-- <p>Find me in app/views/cocktails/index.html.erb</p> -->
 
     <div class="row">
-        <% @cocktails.each do |cocktail| %>
+      <% @cocktails.each do |cocktail| %>
         <div class="col-xs-12 col-sm-4">
           <%= link_to cocktail_path(cocktail) do  %>
             <div class="card grow" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=cocktail.image_url%>);">
@@ -26,6 +26,6 @@
             </div>
           <% end %>
         </div>
-        <% end %>
+      <% end %>
     </div>
 </div>

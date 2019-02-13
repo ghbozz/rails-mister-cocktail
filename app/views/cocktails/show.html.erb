@@ -22,9 +22,6 @@
         </ul>
 
         <br>
-        <%= link_to 'Add a Dose', new_cocktail_dose_path(@cocktail), :class => 'btn btn-primary'  %>
-        <%= link_to 'Back to Cocktails', cocktails_path, :class => 'btn btn-info' %>
-        <%= link_to "Delete", cocktail_path(@cocktail), method: :delete, :class => 'btn btn-danger' %>
       </div>
     </div>
 
@@ -33,11 +30,6 @@
     <div class="example-2 show-card">
       <div class="wrapper" style="background-image: url('<%= @cocktail.image_url %>')">
         <div class="header">
-          <div class="date">
-            <span class="day">12</span>
-            <span class="month">Aug</span>
-            <span class="year">2016</span>
-          </div>
           <ul class="menu-content">
             <li>
               <a href="#" class="fa fa-bookmark-o"></a>
@@ -49,31 +41,33 @@
         <div class="data">
           <div class="content">
             <h1 class="title"><a href="#"><%= @cocktail.name %></a></h1>
-            <p class="text"><%= @cocktail.description %></p>
-            <a href="#" class="button">Read more</a>
+            <br>
+            <p class="text"><%= @cocktail.description.split(' ').first(20).join(' ') %>...</p>
+            <%= link_to 'Dose+', new_cocktail_dose_path(@cocktail), :class => 'btn btn-primary'  %>
+            <%= link_to "Delete", cocktail_path(@cocktail), method: :delete, :class => 'btn btn-danger' %>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
-    <div id="reviews">
-      <h4>Reviews (<%= @cocktail.reviews.count %>)</h4>
+  <div id="reviews">
+    <h4>Reviews (<%= @cocktail.reviews.count %>)</h4>
 
-      <ul class="list-group">
-        <% @cocktail.reviews.each do |dose| %>
-        <li class="list-group-item">
-          <%= dose.content %>
-        </li>
-        <% end %>
-      </ul>
-    </div>
-
+    <ul class="list-group ingredients-list">
+      <% @cocktail.reviews.each do |dose| %>
+      <li class="list-group-item">
+        <%= dose.content %>
+      </li>
+      <% end %>
+    </ul>
     <h4>Add a review</h4>
 
     <%= simple_form_for [@cocktail, @review] do |f| %>
       <%= f.input :content %>
       <%= f.submit "Add ur Review", class: "btn btn-primary", id: 'create-review-btn' %>
     <% end %>
+  </div>
+
+
 </div>
