@@ -20,7 +20,6 @@ user_serialized = open(url).read
 result = JSON.parse(user_serialized)
   result['drinks'].each do |item|
     Ingredient.create!(name: item["strIngredient1"])
-    # p item['strIngredient1']
   end
 
 puts 'Done!!'
