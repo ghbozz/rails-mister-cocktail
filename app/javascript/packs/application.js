@@ -13,3 +13,5 @@ import { loadDynamicBannerText } from '../components/banner';
 loadDynamicBannerText();
 import { bindSweetAlertButtonDemo } from '../components/sweet_alert';
 bindSweetAlertButtonDemo();
+
+console.log('hello')
