@@ -2,8 +2,7 @@ class CocktailsController < ApplicationController
 
   def index
     if params[:query].present?
-      # @cocktails = Cocktail.where("name ILIKE ?", "%#{params[:query]}%")
-      @cocktails = Cocktail.search_by_name(params[:query])
+      @cocktails = Cocktail.global_search(params[:query])
     else
       @cocktails = Cocktail.all
     end

@@ -5,10 +5,13 @@ class Cocktail < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   include PgSearch
-  pg_search_scope :search_by_name,
+  pg_search_scope :global_search,
     against: [ :name ],
+    associated_against: {
+      ingredients: [ :name ]
+    },
     using: {
-      tsearch: { prefix: true } # <-- now `superman batm` will return something!
+      tsearch: { prefix: true }
     }
 
   mount_uploader :photo, PhotoUploader
