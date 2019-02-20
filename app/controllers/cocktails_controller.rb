@@ -3,11 +3,7 @@ class CocktailsController < ApplicationController
   def index
     if params[:query].present?
       # @cocktails = Cocktail.where("name ILIKE ?", "%#{params[:query]}%")
-      sql_query = " \
-              cocktails.name @@ :query \
-              OR ingredients.name @@ :query \
-            "
-      @cocktails = Cocktail.joins(:ingredients).where(sql_query, query: "%#{params[:query]}%").uniq
+      @cocktails = Cocktail.search_by_name(params[:query])
     else
       @cocktails = Cocktail.all
     end
